@@ -8,8 +8,8 @@ import store from './src/redux/store'
 
 const theme = {
   colors: {
-    primary: 'red',
-    primary_light: 'blue'
+    primary: '#905908',
+    primary_light: '#CB8213'
   },
 };
 
