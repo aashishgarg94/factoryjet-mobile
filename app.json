@@ -1,0 +1,12 @@
+{
+  "name": "factoryjet",
+  "displayName": "factoryjet",
+  "expo": {
+    "name": "factoryjet",
+    "slug": "factoryjet",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
