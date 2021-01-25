@@ -5,6 +5,7 @@ import { Text, withTheme } from 'react-native-elements'
 import { connect } from 'react-redux'
 import TitleBar from '../components/TitleBar'
 import ProductItem from '../components/ProductItem'
+import PageTitle from '../components/PageTitle'
 
 class OffersScreen extends React.Component {
   render() {
@@ -13,12 +14,10 @@ class OffersScreen extends React.Component {
     return (
       <View style={{flex: 1, backgroundColor: "white"}}>
         <TitleBar/>
+        <PageTitle title="Value Offers" />
         <ScrollView>
-          <View style={{ paddingHorizontal: 20 }}>
-          <Text style={{ color: theme.colors.primary, fontWeight: "bold", fontSize: 15 }}>Offers Screen</Text>
-          <View style={{flexWrap: "wrap", flexDirection: "row", marginVertical: 10}}>
+          <View style={{flexWrap: "wrap", flexDirection: "row", marginVertical: 0, paddingHorizontal: 5}}>
           { itemsList.map( ( item ) => <ProductItem item = { item } key={item.id} /> ) }
-          </View>
           </View>
           </ScrollView>
       </View>

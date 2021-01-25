@@ -9,7 +9,7 @@ class ProductItem extends React.Component {
         const { item, theme } = this.props
 
         return (
-            <View style={{ width: "50%", paddingHorizontal: 5, marginVertical: 5, paddingVertical: 5, borderRadius: 2 }}>
+            <View style={{ width: "50%", paddingHorizontal: 5, marginBottom: 5, paddingVertical: 5, borderRadius: 2 }}>
                 <View style={{
                     flexDirection: "row", shadowColor: '#000', borderRadius: 2, paddingVertical: 5,
                     elevation: 2, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2

@@ -17,11 +17,11 @@ class TitleBar extends React.Component {
     const { theme } = this.props
 
     return (
-      <View style={{ backgroundColor: theme.colors.primary_light, marginBottom: 20, flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10 }}>
+      <View style={{ backgroundColor: theme.colors.primary_light, marginBottom: 0, flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10 }}>
         <View style={{justifyContent: "center"}}>
           <FontAwesomeIcon icon={faBars} size={20} color="white"/>
         </View>
-        <Text style={{ color: theme.colors.primary, paddingVertical: 10, fontSize: 20, color: "white", textAlign: "center", fontWeight: "normal" }}>FactoryJet</Text>
+        <Text style={{ color: theme.colors.primary, paddingVertical: 10, fontSize: 20, color: "white", textAlign: "center", fontWeight: "normal", paddingLeft: 20 }}>FactoryJet</Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={{ paddingHorizontal: 10 }}>
             <FontAwesomeIcon icon={faHeart} size={20} color="white" />

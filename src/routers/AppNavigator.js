@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import HomeScreen from '../pages/HomeScreen'
 import OffersScreen from '../pages/OffersScreen'
+import CartScreen from '../pages/CartScreen'
 import ArrivalsScreen from '../pages/ArrivalsScreen'
 import CategoryScreen from '../pages/CategoryScreen'
 import CategoryPage from '../pages/CategoryPage'
@@ -33,6 +34,7 @@ export default function AppNavigator() {
       <Drawer.Screen name="New Arrivals" component={ArrivalsScreen} />
       <Drawer.Screen name="Shop By Category" component={CategoryStack} />
       <Drawer.Screen name="Bestsellers" component={BestsellersScreen} />
+      <Drawer.Screen name="My Cart" component={CartScreen} />
       <Drawer.Screen name="Your Orders" component={OrdersScreen} />
       <Drawer.Screen name="Settings" component={SettingsScreen} />
       <Drawer.Screen name="Customer Support" component={CustomerSupportScreen} />
