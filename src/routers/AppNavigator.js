@@ -17,9 +17,9 @@ const Stack = createStackNavigator();
 
 function CategoryStack() {
   return (
-    <Stack.Navigator initialRouteName="Categories" screenOptions={{headerShown: false}} >
-      <Stack.Screen name="Categories" component={CategoryScreen}/>
-      <Stack.Screen name="Category" component={CategoryPage} />
+    <Stack.Navigator initialRouteName="CategoryScreen" screenOptions={{headerShown: false}} >
+      <Stack.Screen name="CategoryScreen" component={CategoryScreen}/>
+      <Stack.Screen name="CategoryPage" component={CategoryPage} />
     </Stack.Navigator>
   );
 }
