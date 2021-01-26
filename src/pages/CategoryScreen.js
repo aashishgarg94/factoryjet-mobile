@@ -18,7 +18,7 @@ class CategoryScreen extends React.Component {
         <PageTitle title="Shop By Category" />
         <ScrollView>
           <View style={{flexWrap: "wrap", flexDirection: "row", marginVertical: 0, paddingHorizontal: 5}}>
-          { categoriesList.map( ( item ) => <CategoryItem item = { item } key={item.id} width={screenWidth/2 - 30} margin={10} /> ) }
+          { categoriesList.map( ( item ) => <CategoryItem item = { item } key={item.id} width={screenWidth/2 - 30} margin={10} textSize={15} /> ) }
           </View>
           </ScrollView>
       </View>

@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 class CategoryItem extends React.Component {
     render() {
-        const { item, width, theme, margin } = this.props
+        const { item, width, theme, margin, textSize } = this.props
 
         return (
             <View style={{ width: width, borderRadius: 5, margin: margin,
@@ -23,8 +23,8 @@ class CategoryItem extends React.Component {
                     PlaceholderContent={<ActivityIndicator />}
                 >
                 <View style={{ backgroundColor: "grey", position: "absolute", bottom: 0, left: 0, right: 0, 
-                    alignItems: "center", borderBottomLeftRadius: 5, borderBottomRightRadius: 5, opacity: 0.9 }}>
-            <Text style={{fontWeight: "normal", fontSize: 15, paddingVertical: 5, color: "white" }}>{item.title}</Text>
+                    alignItems: "center", borderBottomLeftRadius: 5, borderBottomRightRadius: 5, opacity: 0.8 }}>
+            <Text style={{fontWeight: "normal", fontSize: textSize, paddingVertical: 5, color: "white", textAlign: "center" }}>{item.title}</Text>
                 </View>
                 </ImageBackground>
             </View>
@@ -35,7 +35,8 @@ class CategoryItem extends React.Component {
 CategoryItem.propTypes = {
     item: propTypes.object.isRequired,
     width: propTypes.number.isRequired,
-    margin: propTypes.number.isRequired
+    margin: propTypes.number.isRequired,
+    textSize: propTypes.number.isRequired
 }
 
 const mapStateToProps = (state) => ({
