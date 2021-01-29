@@ -29,13 +29,13 @@ class TitleBar extends React.Component {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={{ paddingHorizontal: 10 }}
             onStartShouldSetResponder={
-              () => this.props.navigation.navigate('My Cart')
+              () => this.props.navigation.navigate('My Cart', { screen: "CartScreen", params: { tab: "wishlist" } })
           }>
             <FontAwesomeIcon icon={faHeart} size={20} color="white" />
           </View>
           <View style={{paddingHorizontal: 0 }}
             onStartShouldSetResponder={
-              () => this.props.navigation.navigate('My Cart')
+              () => this.props.navigation.navigate('My Cart', { screen: "CartScreen", params: { tab: "cart" } })
           }>
             <FontAwesomeIcon icon={faShoppingCart} size={20} color="white" />
           </View>

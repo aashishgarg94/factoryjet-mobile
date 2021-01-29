@@ -31,7 +31,7 @@ class ProductItem extends React.Component {
                         <Text style={{ fontSize: 10 }}>{item.category}</Text>
                         <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "bold", marginTop: 2 }}>{item.title}</Text>
                         <Text style={{ fontSize: 12, color: theme.colors.primary_light, fontWeight: "bold", marginTop: 10 }}>{'Rs. ' + item.price}</Text>
-                        <Text style={{ fontSize: 10, marginTop: 2, color: "#505050" }}>{'Rs. ' + item.mrp}</Text>
+                        <Text style={{ fontSize: 10, marginTop: 2, color: "#505050", textDecorationLine: "line-through" }}>{'Rs. ' + item.mrp}</Text>
                         <View style={{ flexDirection: "row", alignItems: "flex-end", justifyContent: "flex-end", marginTop: 5, marginRight: 10 }}>
                             <View style={{ paddingHorizontal: 5 }}>
                                 <FontAwesomeIcon icon={faHeart} size={15} color={theme.colors.primary_light} />
