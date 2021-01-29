@@ -12,7 +12,9 @@ class CartScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tab: 'cart'
+      tab: 'cart',
+      cartlist: [],
+      wishlist: []
     }
   }
 
@@ -23,13 +25,26 @@ class CartScreen extends React.Component {
         tab: routeTab
       })
     }
+    this.setState({
+      cartlist: this.props.data.cartList,
+      wishlist: this.props.data.wishList
+    })
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.data.cartList !== this.props.data.cartList){
+      this.setState({ cartlist: this.props.data.cartList})
+    }
+    if(prevProps.data.wishList !== this.props.data.wishList){
+      this.setState({ wishlist: this.props.data.wishList})
+    }
   }
 
   render() {
-    const { data: { cartList, wishList }, theme } = this.props
+    const { theme } = this.props
 
-    const subtotal = cartList?.map(item => item.price * item.qty).reduce((prev, next) => prev + next);
-    const gst = cartList?.map(item => item.price * item.qty * item.gst / 100).reduce((prev, next) => prev + next);
+    const subtotal = this.state.cartlist?.map(item => item.price * item.qty).reduce((prev, next) => prev + next, 0);
+    const gst = this.state.cartlist?.map(item => item.price * item.qty * item.gst / 100).reduce((prev, next) => prev + next, 0);
 
     const checkoutCostMarkup = (
       <>
@@ -59,8 +74,8 @@ class CartScreen extends React.Component {
         <TitleBar />
         <PageTitle title={this.state.tab !== "cart" ? "My Wishlist" : "My Cart" } />
         <ScrollView>
-          {this.state.tab === "cart" ? cartList.map((item) => <CartItem item={item} key={item.id} />)
-            : this.state.tab === "wishlist" ? wishList.map((item) => <WishItem item={item} key={item.id} />)
+          {this.state.tab === "cart" ? this.state.cartlist.map((item) => <CartItem item={item} key={item.id} />)
+            : this.state.tab === "wishlist" ? this.state.wishlist.map((item) => <WishItem item={item} key={item.id} />)
               : null}
           {this.state.tab === "cart" ? checkoutCostMarkup : null}
         </ScrollView>
