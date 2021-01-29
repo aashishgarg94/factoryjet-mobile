@@ -4,6 +4,10 @@ import { View, ActivityIndicator } from 'react-native'
 import { Text, withTheme, Image } from 'react-native-elements'
 import { connect } from 'react-redux'
 
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+
 class ProductItem extends React.Component {
     render() {
         const { item, theme } = this.props
@@ -28,6 +32,14 @@ class ProductItem extends React.Component {
                         <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "bold", marginTop: 2 }}>{item.title}</Text>
                         <Text style={{ fontSize: 12, color: theme.colors.primary_light, fontWeight: "bold", marginTop: 10 }}>{'Rs. ' + item.price}</Text>
                         <Text style={{ fontSize: 10, marginTop: 2, color: "#505050" }}>{'Rs. ' + item.mrp}</Text>
+                        <View style={{ flexDirection: "row", alignItems: "flex-end", justifyContent: "flex-end", marginTop: 5, marginRight: 10 }}>
+                            <View style={{ paddingHorizontal: 5 }}>
+                                <FontAwesomeIcon icon={faHeart} size={15} color={theme.colors.primary_light} />
+                            </View>
+                            <View style={{ paddingHorizontal: 0 }}>
+                                <FontAwesomeIcon icon={faShoppingCart} size={15} color={theme.colors.primary_light} />
+                            </View>
+                        </View>
                     </View>
                 </View>
             </View>

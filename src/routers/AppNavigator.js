@@ -1,5 +1,14 @@
 import React from 'react'
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer';
+import { CommonActions } from '@react-navigation/native';
+import { DrawerActions } from '@react-navigation/native';
+
+
 import { createStackNavigator } from '@react-navigation/stack'
 
 import HomeScreen from '../pages/HomeScreen'
@@ -12,6 +21,7 @@ import BestsellersScreen from '../pages/BestsellersScreen'
 import OrdersScreen from '../pages/OrdersScreen'
 import SettingsScreen from '../pages/SettingsScreen'
 import CustomerSupportScreen from '../pages/CustomerSupportScreen'
+import TitleBar from '../components/TitleBar'
 
 const Stack = createStackNavigator();
 
@@ -26,8 +36,8 @@ function HomeStack() {
 
 function CategoryStack() {
   return (
-    <Stack.Navigator initialRouteName="CategoryScreen" screenOptions={{headerShown: false}} >
-      <Stack.Screen name="CategoryScreen" component={CategoryScreen}/>
+    <Stack.Navigator initialRouteName="CategoryScreen" screenOptions={{headerShown: false}}  >
+      <Stack.Screen name="CategoryScreen" component={CategoryScreen} />
       <Stack.Screen name="CategoryPage" component={CategoryPage} />
     </Stack.Navigator>
   );
@@ -89,13 +99,34 @@ function CustomerSupportStack() {
   );
 }
 
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItem
+        name="Logo"
+        label="FactoryJet"
+        component={HomeStack}
+        style={{paddingTop: 5, borderBottomWidth: 1, marginBottom: 5, paddingBottom: 5, borderColor: "#CB8213"}}
+        labelStyle={{color: "#905908", fontSize: 20}}
+      />
+    <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+}
+
 const Drawer = createDrawerNavigator();
 
 export default function AppNavigator() {
   return (
-    <Drawer.Navigator initialRouteName="Home" backBehavior="history" >
-      <Drawer.Screen name="Home" component={HomeStack} options={{ unmountOnBlur: true }} />
-      <Drawer.Screen name="Value Offers" component={OffersStack} options={{ unmountOnBlur: true }} />
+  <>
+    <Drawer.Navigator initialRouteName="Home" backBehavior="history" drawerContent={props => <CustomDrawerContent {...props} />}
+      drawerContentOptions={{
+        activeTintColor: "#905908",
+        inactiveTintColor: "#905908"        
+      }}
+      >
+      <Drawer.Screen name="Home" component={HomeStack} options={{ unmountOnBlur: true }} listeners={{ }}/>
+      <Drawer.Screen name="Value Offers" component={OffersStack} options={{ unmountOnBlur: true }}/>
       <Drawer.Screen name="New Arrivals" component={ArrivalsStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Shop By Category" component={CategoryStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Bestsellers" component={BestsellersStack} options={{ unmountOnBlur: true }} />
@@ -104,5 +135,6 @@ export default function AppNavigator() {
       <Drawer.Screen name="Settings" component={SettingsStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Customer Support" component={CustomerSupportStack} options={{ unmountOnBlur: true }} />
     </Drawer.Navigator>
+    </>
   );
 }

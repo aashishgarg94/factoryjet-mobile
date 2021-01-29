@@ -1,13 +1,13 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import { View, ActivityIndicator, ImageBackground, Dimensions, ScrollView } from 'react-native'
-import { Text, Image, withTheme } from 'react-native-elements'
+import { Text, Image, withTheme, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 
 import TitleBar from '../components/TitleBar'
 import CategoryItem from '../components/CategoryItem'
 import ProductItem from '../components/ProductItem'
-
+import { useNavigation } from '@react-navigation/native';
 
 class HomeScreen extends React.Component {
   render() {
@@ -29,7 +29,14 @@ class HomeScreen extends React.Component {
           <View style={{ flexWrap: "wrap", flexDirection: "row" }}>
               {sectionData.map((item) => <ProductItem item={item} key={item.id} />)}
           </View>
-          <View style={{paddingHorizontal: 10}}>
+          <View style={{paddingHorizontal: 10}}
+            onStartShouldSetResponder={
+              () => { 
+                sectionType === "arrivals" ? this.props.navigation.navigate('New Arrivals')
+                : sectionType === "bestsellers" ? this.props.navigation.navigate('Bestsellers')
+                : sectionType === "offers" ? this.props.navigation.navigate('Value Offers')
+                : null }
+          }>
           <Text style={{textAlign: "right", color: theme.colors.primary}}>{'See more -->'}</Text>
           </View>
           </View>
@@ -74,4 +81,8 @@ const mapStateToProps = (state) => ({
 const mapActionToProps = {
 }
 
-export default connect(mapStateToProps, mapActionToProps)(withTheme(HomeScreen))
+export default connect(mapStateToProps, mapActionToProps)(withTheme(function(props) {
+  const navigation = useNavigation();
+
+  return <HomeScreen {...props} navigation={navigation} />;
+}))

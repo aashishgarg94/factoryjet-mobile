@@ -13,7 +13,8 @@ class CategoryItem extends React.Component {
             <View style={{ width: width, borderRadius: 5, margin: margin,
                 elevation: 5, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2, shadowColor: "#000" }}
                 onStartShouldSetResponder={
-                    () => this.props.navigation.navigate('CategoryPage', {categoryId: item.id})
+                    () => this.props.navigation.navigate('CategoryPage',
+                        { categoryId: item.id} )
                   }>
                 <ImageBackground
                     source={require('../images/electricals.jpeg')}

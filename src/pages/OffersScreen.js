@@ -1,7 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
 import { View, ScrollView } from 'react-native'
-import { Text, withTheme } from 'react-native-elements'
+import { Text, withTheme, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import TitleBar from '../components/TitleBar'
 import ProductItem from '../components/ProductItem'
