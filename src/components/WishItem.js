@@ -6,6 +6,9 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import Toast from 'react-native-toast-message';
+
+import { addToCart, removeFromWishlist } from '../redux/actions/dataActions'
 
 class WishItem extends React.Component {
   render() {
@@ -23,8 +26,25 @@ class WishItem extends React.Component {
             <Text style={{ fontSize: 12, marginTop: 15, color: "grey", paddingLeft: 2, textDecorationLine: "line-through" }}>{'Rs. ' + item.mrp}</Text>
             <View style={{flexDirection: "row", alignItems: "center"}}>
               <Text style={{ fontSize: 15, marginTop: 2, color: theme.colors.primary, paddingLeft: 2, paddingRight: 20 }}>{'Rs. ' + item.price}</Text>
-              <FontAwesomeIcon icon={faShoppingCart} size={20} color={theme.colors.primary_light} />
-              <FontAwesomeIcon icon={faTrash} size={15} color="grey" style={{opacity: 0.8, marginLeft: 10}} />
+              <View onStartShouldSetResponder={() => {
+                this.props.addToCart({...item, qty: 1}),
+                Toast.show({
+                  text1: item.title,
+                  text2: 'Successfully added to Cart'
+                })
+              }}>
+                <FontAwesomeIcon icon={faShoppingCart} size={20} color={theme.colors.primary_light} />
+                </View>
+              <View onStartShouldSetResponder={() => {
+                this.props.removeFromWishlist(item.id),
+                Toast.show({
+                  type: 'error',
+                  text1: item.title,
+                  text2: 'Removed from Wishlist'
+                })
+                }}>
+                <FontAwesomeIcon icon={faTrash} size={15} color="grey" style={{opacity: 0.8, marginLeft: 10}} />
+                </View>
             </View>
           </View>
           <Image
@@ -53,6 +73,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
+  addToCart,
+  removeFromWishlist
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withTheme(WishItem))

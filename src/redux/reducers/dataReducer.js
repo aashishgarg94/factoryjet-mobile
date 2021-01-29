@@ -7,6 +7,8 @@ import {
     SET_WISHLIST,
     ADD_TO_WISHLIST,
     SET_CATEGORIESLIST,
+    REMOVE_FROM_CART,
+    REMOVE_FROM_WISHLIST
 } from '../types';
 
 const initialState = {
@@ -37,11 +39,18 @@ export function dataReducer(state = initialState, action) {
                 cartList: action.payload
             }
         case ADD_TO_CART:
-            //check if already in cart, then just increase count
-            const newCartList = state.cartList.length === 0 ? [action.payload] : [action.payload, ...state.cartList]
+            const itemCartIndex = state.cartList.findIndex(
+                (item) => item.id === action.payload.id,
+              );        
+            if(itemCartIndex === -1){
+                state.cartList = state.cartList.length === 0 ? [action.payload] : [action.payload, ...state.cartList]
+            }else{
+                let itemAdded = state.cartList[itemCartIndex]
+                itemAdded.qty = itemAdded.qty + action.payload.qty
+                state.cartList[itemCartIndex] = itemAdded
+            }
             return {
                 ...state,
-                cartList: newCartList
             }
         case SET_ORDERSLIST:
             return {
@@ -54,16 +63,37 @@ export function dataReducer(state = initialState, action) {
                 wishlist: action.payload
             }
         case ADD_TO_WISHLIST:
-            //check if already present
-            const newWishlist = state.wishlist.length === 0 ? [action.payload] : [action.payload, ...state.wishlist]
+            const itemWishlistIndex = state.wishList.findIndex((item) => item.id === action.payload.id )
+            if(itemWishlistIndex === -1){
+                state.wishList = state.wishList.length === 0 ? [action.payload] : [action.payload, ...state.wishList]
+            }
             return {
                 ...state,
-                wishist: newWishlist
             }
         case SET_CATEGORIESLIST:
             return {
                 ...state,
                 categoriesList: action.payload
+            }
+        case REMOVE_FROM_CART:
+            const itemCartRemoveIndex = state.cartList.findIndex(
+                (item) => item.id === action.payload,
+              );
+            if(itemCartRemoveIndex !== -1){
+                state.cartList.splice(itemCartRemoveIndex, 1)
+            }
+            return{
+                ...state
+            }
+        case REMOVE_FROM_WISHLIST:
+            const itemWishlistRemoveIndex = state.wishList.findIndex(
+                (item) => item.id === action.payload,
+            );
+            if(itemWishlistRemoveIndex !== -1){
+                state.wishList.splice(itemWishlistRemoveIndex, 1)
+            }
+            return{
+                ...state
             }
         default:
             return state

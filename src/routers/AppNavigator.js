@@ -105,7 +105,7 @@ function CustomDrawerContent(props) {
       <DrawerItem
         name="Logo"
         label="FactoryJet"
-        component={HomeStack}
+        onPress={() => props.navigation.navigate('Home')}
         style={{paddingTop: 5, borderBottomWidth: 1, marginBottom: 5, paddingBottom: 5, borderColor: "#CB8213"}}
         labelStyle={{color: "#905908", fontSize: 20}}
       />

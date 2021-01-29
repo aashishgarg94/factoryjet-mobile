@@ -1,6 +1,6 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { View, ActivityIndicator, ImageBackground } from 'react-native'
+import { View, ActivityIndicator, ImageBackground, TouchableOpacity } from 'react-native'
 import { Text, withTheme, Image } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { useNavigation } from '@react-navigation/native';
@@ -10,12 +10,13 @@ class CategoryItem extends React.Component {
         const { item, width, theme, margin, textSize } = this.props
 
         return (
+            <TouchableOpacity
+                onPress={() => {
+                this.props.navigation.navigate('CategoryPage',
+                { categoryId: item.id} )
+            }}>
             <View style={{ width: width, borderRadius: 5, margin: margin,
-                elevation: 5, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2, shadowColor: "#000" }}
-                onStartShouldSetResponder={
-                    () => this.props.navigation.navigate('CategoryPage',
-                        { categoryId: item.id} )
-                  }>
+                elevation: 5, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2, shadowColor: "#000" }}>
                 <ImageBackground
                     source={require('../images/electricals.jpeg')}
                     resizeMode="cover"
@@ -29,6 +30,7 @@ class CategoryItem extends React.Component {
                 </View>
                 </ImageBackground>
             </View>
+            </TouchableOpacity>
         );
     }
 }

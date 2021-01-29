@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
+import Toast from 'react-native-toast-message';
+
+import { addToCart, addToWishlist } from '../redux/actions/dataActions'
+
 class ProductItem extends React.Component {
     render() {
         const { item, theme } = this.props
@@ -33,10 +37,24 @@ class ProductItem extends React.Component {
                         <Text style={{ fontSize: 12, color: theme.colors.primary_light, fontWeight: "bold", marginTop: 10 }}>{'Rs. ' + item.price}</Text>
                         <Text style={{ fontSize: 10, marginTop: 2, color: "#505050", textDecorationLine: "line-through" }}>{'Rs. ' + item.mrp}</Text>
                         <View style={{ flexDirection: "row", alignItems: "flex-end", justifyContent: "flex-end", marginTop: 5, marginRight: 10 }}>
-                            <View style={{ paddingHorizontal: 5 }}>
+                            <View style={{ paddingHorizontal: 5 }} 
+                                onStartShouldSetResponder={() => {
+                                    this.props.addToWishlist({...item}),
+                                    Toast.show({
+                                        text1: item.title,
+                                        text2: 'Successfully added to Wishlist'
+                                      })
+                                }}>
                                 <FontAwesomeIcon icon={faHeart} size={15} color={theme.colors.primary_light} />
                             </View>
-                            <View style={{ paddingHorizontal: 0 }}>
+                            <View style={{ paddingHorizontal: 0 }}
+                                onStartShouldSetResponder={() => {
+                                    this.props.addToCart({...item, qty: 1}),
+                                    Toast.show({
+                                        text1: item.title,
+                                        text2: 'Successfully added to Cart'
+                                      })
+                                    }}>
                                 <FontAwesomeIcon icon={faShoppingCart} size={15} color={theme.colors.primary_light} />
                             </View>
                         </View>
@@ -55,6 +73,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
+    addToCart,
+    addToWishlist
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withTheme(ProductItem))

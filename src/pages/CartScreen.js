@@ -68,7 +68,7 @@ class CartScreen extends React.Component {
           {this.state.tab === "cart" ?
             <Button buttonStyle={{ borderRadius: 0, marginRight: 2, backgroundColor: "white", borderWidth: 1 }} title="GO TO WISHLIST"
               containerStyle={{ flex: 0.5 }} titleStyle={{ color: "black" }} onPress={() => this.setState({ tab: "wishlist" })} />
-            : <Button buttonStyle={{ borderRadius: 0, marginRight: 2, backgroundColor: "white", borderWidth: 1 }} title="CHECK MY CART"
+            : <Button buttonStyle={{ borderRadius: 0, marginRight: 2, backgroundColor: "white", borderWidth: 1 }} title="GO TO CART"
               containerStyle={{ flex: 0.5 }} titleStyle={{ color: "black" }} onPress={() => this.setState({ tab: "cart" })} />}
           <Button buttonStyle={{ borderRadius: 0, color: theme.colors.primary, backgroundColor: theme.colors.primary_light, borderWidth: 1 }}
             containerStyle={{ flex: 0.5 }} titleStyle={{}} title="CHECKOUT" />
