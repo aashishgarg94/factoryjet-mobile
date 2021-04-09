@@ -5,9 +5,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import { CommonActions } from '@react-navigation/native';
-import { DrawerActions } from '@react-navigation/native';
-
+import { NavigationContainer } from '@react-navigation/native'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -21,7 +19,6 @@ import BestsellersScreen from '../pages/BestsellersScreen'
 import OrdersScreen from '../pages/OrdersScreen'
 import SettingsScreen from '../pages/SettingsScreen'
 import CustomerSupportScreen from '../pages/CustomerSupportScreen'
-import TitleBar from '../components/TitleBar'
 
 const Stack = createStackNavigator();
 
@@ -118,7 +115,7 @@ const Drawer = createDrawerNavigator();
 
 export default function AppNavigator() {
   return (
-  <>
+    <NavigationContainer>
     <Drawer.Navigator initialRouteName="Home" backBehavior="history" drawerContent={props => <CustomDrawerContent {...props} />}
       drawerContentOptions={{
         activeTintColor: "#905908",
@@ -135,6 +132,6 @@ export default function AppNavigator() {
       <Drawer.Screen name="Settings" component={SettingsStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Customer Support" component={CustomerSupportStack} options={{ unmountOnBlur: true }} />
     </Drawer.Navigator>
-    </>
+    </NavigationContainer>
   );
 }

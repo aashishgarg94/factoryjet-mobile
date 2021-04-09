@@ -1,13 +1,14 @@
 import * as React from 'react'
-import { NavigationContainer, useLinkProps } from '@react-navigation/native'
-import AppNavigator from './src/routers/AppNavigator'
+import AuthNavigator from './src/routers/AuthNavigator'
 import { ThemeProvider } from 'react-native-elements'
 
+import axios from 'axios'
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
 
-import Toast, { BaseToast } from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';
 
+axios.defaults.baseURL = 'http://18.216.40.118:8000/'
 const theme = {
   colors: {
     primary: '#905908',
@@ -20,9 +21,7 @@ export default function App() {
     <>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <NavigationContainer>
-            <AppNavigator />
-          </NavigationContainer>
+            <AuthNavigator />
         </ThemeProvider>
       </Provider>
       <Toast ref={(ref) => Toast.setRef(ref)} />
