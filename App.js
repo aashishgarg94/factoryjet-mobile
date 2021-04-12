@@ -10,6 +10,15 @@ import Toast from 'react-native-toast-message';
 
 axios.defaults.baseURL = 'http://18.216.40.118:8000/'
 const theme = {
+  Text: {
+    style: {
+      fontSize: 15
+    },
+    h3Style: {
+      fontSize: 18,
+      fontWeight: "bold"
+    }
+  },
   colors: {
     primary: '#905908',
     primary_light: '#CB8213'

@@ -8,6 +8,7 @@ import TitleBar from '../components/TitleBar'
 import CategoryItem from '../components/CategoryItem'
 import ProductItem from '../components/ProductItem'
 import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 class HomeScreen extends React.Component {
   render() {
@@ -16,29 +17,29 @@ class HomeScreen extends React.Component {
 
     const sectionMarkup = (sectionTitle, sectionData, sectionType) => (
       <View style={{ marginBottom: 10 }}>
-        <Text style={{ color: theme.colors.primary, fontWeight: "bold", paddingHorizontal: 15, fontSize: 15 }}>{sectionTitle}</Text>
+        <Text h3 style={{ paddingHorizontal: 15 }}>{sectionTitle}</Text>
         { sectionType === "categories" ?
           <View style={{ flexDirection: "row", marginVertical: 10 }}>
-            <View style={{ flex: 0.125 }}></View>
-            <View style={{ flex: 0.75, flexWrap: "wrap", flexDirection: "row" }}>
-              {sectionData.map((item) => <CategoryItem item={item} key={item.id} width={screenWidth / 4 - 15} margin={5} textSize={10} />)}
+            <View style={{ flex: 0.05 }}></View>
+            <View style={{ flex: 0.9, flexWrap: "wrap", flexDirection: "row" }}>
+              {sectionData.map((item) => <CategoryItem item={item} key={item.id} width={screenWidth * 9 / 20 - 30} margin={15} textSize={10} />)}
             </View>
-            <View style={{ flex: 0.125 }}></View>
+            <View style={{ flex: 0.05 }}></View>
           </View>
           : <View style={{ marginVertical: 10 }}>
           <View style={{ flexWrap: "wrap", flexDirection: "row" }}>
               {sectionData.map((item) => <ProductItem item={item} key={item.id} />)}
           </View>
-          <View style={{paddingHorizontal: 10}}
-            onStartShouldSetResponder={
-              () => { 
-                sectionType === "arrivals" ? this.props.navigation.navigate('New Arrivals')
-                : sectionType === "bestsellers" ? this.props.navigation.navigate('Bestsellers')
-                : sectionType === "offers" ? this.props.navigation.navigate('Value Offers')
-                : null }
-          }>
+          <TouchableOpacity onPress={() => {
+            sectionType === "arrivals" ? this.props.navigation.navigate('New Arrivals')
+            : sectionType === "bestsellers" ? this.props.navigation.navigate('Bestsellers')
+            : sectionType === "offers" ? this.props.navigation.navigate('Value Offers')
+            : null
+          }}>
+          <View style={{paddingHorizontal: 10}}>
           <Text style={{textAlign: "right", color: theme.colors.primary}}>{'See more -->'}</Text>
           </View>
+          </TouchableOpacity>
           </View>
         }
             </View>
@@ -60,10 +61,10 @@ class HomeScreen extends React.Component {
               </View>
             </ImageBackground>
           </View>
-          {sectionMarkup("Shop By Category", categoriesList, "categories")}
           {sectionMarkup("New Arrivals", itemsHomePageList, "arrivals")}
           {sectionMarkup("Bestsellers", itemsHomePageList, "bestsellers")}
           {sectionMarkup("Great Deals", itemsHomePageList, "offers")}
+          {sectionMarkup("Shop By Category", categoriesList, "categories")}
         </ScrollView>
       </View>
     );

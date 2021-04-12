@@ -19,35 +19,20 @@ class ProductItem extends React.Component {
         return (
             <View style={{ width: "50%", paddingHorizontal: 5, marginBottom: 5, paddingVertical: 5, borderRadius: 2 }}>
                 <View style={{
-                    flexDirection: "row", shadowColor: '#000', borderRadius: 2, paddingVertical: 5,
-                    elevation: 2, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2
+                    shadowColor: '#000', borderRadius: 0, paddingVertical: 5,
+                    elevation: 0, shadowOffset: { width: 0, height: 0 }, shadowRadius: 0
                 }}>
-                    <View style={{ flex: 0.5, paddingLeft: 2 }}>
+                    <View style={{ paddingLeft: 2 }}>
                         <Image
                             source={require('../images/knob.jpeg')}
                             resizeMode="cover"
                             resizeMethod="resize"
-                            style={{ width: "auto", height: 100 }}
+                            style={{ width: "auto", height: 200 }}
                             PlaceholderContent={<ActivityIndicator />}
                         />
                     </View>
-                    <View style={{ flex: 0.5, paddingLeft: 5, paddingRight: 5, paddingVertical: 5 }}>
-                        <Text style={{ fontSize: 10 }}>{item.category}</Text>
-                        <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "bold", marginTop: 2 }}>{item.title}</Text>
-                        <Text style={{ fontSize: 12, color: theme.colors.primary_light, fontWeight: "bold", marginTop: 10 }}>{'Rs. ' + item.price}</Text>
-                        <Text style={{ fontSize: 10, marginTop: 2, color: "#505050", textDecorationLine: "line-through" }}>{'Rs. ' + item.mrp}</Text>
-                        <View style={{ flexDirection: "row", alignItems: "flex-end", justifyContent: "flex-end", marginTop: 5, marginRight: 10 }}>
-                            <View style={{ paddingHorizontal: 5 }} 
-                                onStartShouldSetResponder={() => {
-                                    this.props.addToWishlist({...item}),
-                                    Toast.show({
-                                        text1: item.title,
-                                        text2: 'Successfully added to Wishlist'
-                                      })
-                                }}>
-                                <FontAwesomeIcon icon={faHeart} size={15} color={theme.colors.primary_light} />
-                            </View>
-                            <View style={{ paddingHorizontal: 0 }}
+                    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 5, marginHorizontal: 10, paddingHorizontal: 5, paddingVertical: 5, backgroundColor: "black" }}>
+                            <View style={{ paddingHorizontal: 0, flex: 0.8, alignItems: "center" }}
                                 onStartShouldSetResponder={() => {
                                     this.props.addToCart({...item, qty: 1}),
                                     Toast.show({
@@ -55,8 +40,25 @@ class ProductItem extends React.Component {
                                         text2: 'Successfully added to Cart'
                                       })
                                     }}>
-                                <FontAwesomeIcon icon={faShoppingCart} size={15} color={theme.colors.primary_light} />
+                                <Text style={{color: "white"}}>Add To Cart</Text>
                             </View>
+                            <View style={{ paddingHorizontal: 5, flex: 0.2, borderLeftColor: "grey", borderLeftWidth: 1, alignItems: "center" }} 
+                                onStartShouldSetResponder={() => {
+                                    this.props.addToWishlist({...item}),
+                                    Toast.show({
+                                        text1: item.title,
+                                        text2: 'Successfully added to Wishlist'
+                                      })
+                                }}>
+                                <FontAwesomeIcon icon={faHeart} size={15} color="white" />
+                            </View>
+                        </View>
+                    <View style={{ paddingLeft: 5, paddingRight: 5, paddingVertical: 5, justifyContent: "center", alignItems: "center" }}>
+                        <Text style={{ fontSize: 10, textAlign: "center" }}>{item.category}</Text>
+                        <Text style={{ fontSize: 12, textAlign: "center", fontWeight: "normal", marginTop: 2 }}>{item.title}</Text>
+                        <View style={{flexDirection: "row", marginTop: 5}}>
+                        <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "bold" }}>{'Rs. ' + item.price}</Text>
+                        <Text style={{ fontSize: 10, textDecorationLine: "line-through" }}>{'Rs. ' + item.mrp}</Text>
                         </View>
                     </View>
                 </View>
