@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import TitleBar from '../components/TitleBar'
 import ProductItem from '../components/ProductItem'
 import PageTitle from '../components/PageTitle'
+import { getAllProducts } from '../redux/actions/dataActions'
 
 class CategoryPage extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class CategoryPage extends React.Component {
   componentDidMount() {
     this.setState({
       category: this.props.route.params.categoryId.toString()
-    })
+    }, this.props.getAllProducts(this.state.category))
   }
 
   render() {
@@ -46,6 +47,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
+  getAllProducts
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withTheme(CategoryPage))

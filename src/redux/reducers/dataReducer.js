@@ -8,10 +8,12 @@ import {
     ADD_TO_WISHLIST,
     SET_CATEGORIESLIST,
     REMOVE_FROM_CART,
-    REMOVE_FROM_WISHLIST
+    REMOVE_FROM_WISHLIST,
+    LOADING_DATA
 } from '../types';
 
 const initialState = {
+    loading: false,
     item: {},
     itemsList: [{id: 1, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}, {id: 2, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}, {id: 3, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}],
     itemsHomePageList: [{id: 1, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}, {id: 2, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}],
@@ -23,6 +25,11 @@ const initialState = {
 
 export function dataReducer(state = initialState, action) {
     switch (action.type) {
+        case LOADING_DATA:
+            return {
+                ...state,
+                loading: true
+            }
         case SET_ITEMSLIST:
             return {
                 ...state,
@@ -71,9 +78,11 @@ export function dataReducer(state = initialState, action) {
                 ...state,
             }
         case SET_CATEGORIESLIST:
+            console.log(action.payload)
             return {
                 ...state,
-                categoriesList: action.payload
+                categoriesList: action.payload,
+                loading: false
             }
         case REMOVE_FROM_CART:
             const itemCartRemoveIndex = state.cartList.findIndex(

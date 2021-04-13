@@ -59,7 +59,7 @@ class CartItem extends React.Component {
             <Text style={{ fontSize: 15, marginTop: 5, color: theme.colors.primary, paddingLeft: 2 }}>{'Rs. ' + item.price * item.qty}</Text>
           </View>
           <Image
-            source={require('../images/knob.jpeg')}
+            source={require('../images/hoodie.jpeg')}
             resizeMode="cover"
             resizeMethod="resize"
             style={{ width: 120, height: 120 }}

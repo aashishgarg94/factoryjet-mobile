@@ -48,7 +48,7 @@ class WishItem extends React.Component {
             </View>
           </View>
           <Image
-            source={require('../images/knob.jpeg')}
+            source={require('../images/hoodie.jpeg')}
             resizeMode="cover"
             resizeMethod="resize"
             style={{ width: 120, height: 120 }}

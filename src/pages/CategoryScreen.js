@@ -3,11 +3,18 @@ import propTypes from 'prop-types'
 import { View, ScrollView, Dimensions } from 'react-native'
 import { Text, withTheme } from 'react-native-elements'
 import { connect } from 'react-redux'
+import { getAllProductCategories } from '../redux/actions/dataActions'
 import TitleBar from '../components/TitleBar'
 import PageTitle from '../components/PageTitle'
-import CategoryItem from '../components/CategoryItem'
+import CategoryListing from '../components/CategoryListing'
 
 class CategoryScreen extends React.Component {
+
+  componentDidMount(){
+    console.log("check")
+    this.props.getAllProductCategories()
+  }
+
   render() {
     const { data: { categoriesList}, theme } = this.props
     const screenWidth = Dimensions.get('window').width
@@ -17,9 +24,7 @@ class CategoryScreen extends React.Component {
         <TitleBar/>
         <PageTitle title="Shop By Category" />
         <ScrollView>
-          <View style={{flexWrap: "wrap", flexDirection: "row", marginVertical: 0, paddingHorizontal: 5}}>
-          { categoriesList.map( ( item ) => <CategoryItem item = { item } key={item.id} width={screenWidth/2 - 30} margin={10} textSize={15} /> ) }
-          </View>
+          { categoriesList.map( ( item ) => <CategoryListing item = { item } key={item.id} /> ) }
           </ScrollView>
       </View>
     );
@@ -35,6 +40,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
+  getAllProductCategories
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withTheme(CategoryScreen))

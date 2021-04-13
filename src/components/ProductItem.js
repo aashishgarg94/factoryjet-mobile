@@ -24,7 +24,7 @@ class ProductItem extends React.Component {
                 }}>
                     <View style={{ paddingLeft: 2 }}>
                         <Image
-                            source={require('../images/knob.jpeg')}
+                            source={require('../images/hoodie.jpeg')}
                             resizeMode="cover"
                             resizeMethod="resize"
                             style={{ width: "auto", height: 200 }}
