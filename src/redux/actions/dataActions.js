@@ -77,10 +77,10 @@ export const getProductSubCategories = (itemId) => (dispatch) => {
     axios
       .post('/all_products', null, {params: {category_id: itemId}})
       .then((res) => {
-          console.log(res)
+          console.log(res.data.products_list)
         dispatch({
           type: SET_ITEMSLIST,
-          payload: res.data,
+          payload: res.data.products_list,
         });
       })
       .catch((err) => console.log(err));

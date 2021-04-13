@@ -3,7 +3,6 @@ import axios from 'axios';
 import qs from 'qs';
 
 import {
-  CLEAR_ERRORS,
   LOADING_UI,
   LOADING_USER,
   SET_AUTHENTICATED,
@@ -20,12 +19,10 @@ export const loginUser = (loginData) => (dispatch) => {
       setAuthorizationHeader(res.data.access_token);
       dispatch({ type: SET_AUTHENTICATED });
       dispatch(getUserData());
-      dispatch({ type: CLEAR_ERRORS });
       console.log("logged in")
     })
     .catch((err) => {
         console.log(err)
-      dispatch({ type: CLEAR_ERRORS });
     });
 };
 
@@ -33,7 +30,6 @@ export const signupUser = (newUserData) => (dispatch) => {
   axios
     .post('/register/buyer', newUserData)
     .then((res) => {
-      dispatch({ type: CLEAR_ERRORS });
       dispatch({ type: SET_NEWUSER, payload: res.data });
     })
     .catch((err) => {
@@ -81,5 +77,4 @@ const setAuthorizationHeader = (token) => {
 };
 
 export const clearErrors = () => (dispatch) => {
-  dispatch({ type: CLEAR_ERRORS });
 };

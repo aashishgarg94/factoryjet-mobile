@@ -15,12 +15,12 @@ import {
 const initialState = {
     loading: false,
     item: {},
-    itemsList: [{id: 1, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}, {id: 2, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}, {id: 3, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}],
-    itemsHomePageList: [{id: 1, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}, {id: 2, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}],
+    itemsList: [],
+    itemsHomePageList: [],
     ordersList: [{id: 1, date: "05 Jan 2021", store: "XYZ Store", store_location: "Mumbai, India", delivery_address: "Veera Desai Road, Azad Nagar, Mumbai", items: [{id: 1, title: "Brass Knob Set", qty: 2}, {id: 2, title: "Nails", qty: 1}], status: "Delivered", amount: 5000}],
-    cartList: [{id: 1, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18, qty: 1}, {id: 2, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18, qty: 2}, {id: 3, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18, qty: 3}],
-    wishList: [{id: 1, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}, {id: 2, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}, {id: 3, category: "Anchors and Doors", title: "Polished Brass Set", price: 4500, mrp: 5000, discount: 10, delivery: "In 3 days", gst: 18}],
-    categoriesList: [{id: 1, title: "Electricals"}, {id: 2, title: "Plumbing"}, {id: 3, title: "Anchors"}, {id: 4, title: "Wires"}, {id: 5, title: "Fastners"}, {id: 6, title: "Nails"}, {id: 7, title: "Electricals"}, {id: 8, title: "Plumbing"}, {id: 0, title: "Anchors"}]
+    cartList: [],
+    wishList: [],
+    categoriesList: []
 }
 
 export function dataReducer(state = initialState, action) {

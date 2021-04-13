@@ -16,7 +16,7 @@ class CategoryListing extends React.Component {
                 this.props.getProductSubCategories(item.id)
                 :
                 this.props.navigation.navigate('CategoryPage',
-                { categoryId: item.id} )
+                { category: item.title, categoryId: item.id } )
             }}>
             <View style={{flexDirection: "row", paddingHorizontal: 10, marginVertical: 10}}>
           <Image

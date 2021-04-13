@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 import Toast from 'react-native-toast-message';
 
@@ -54,8 +53,8 @@ class ProductItem extends React.Component {
                             </View>
                         </View>
                     <View style={{ paddingLeft: 5, paddingRight: 5, paddingVertical: 5, justifyContent: "center", alignItems: "center" }}>
-                        <Text style={{ fontSize: 10, textAlign: "center" }}>{item.category}</Text>
-                        <Text style={{ fontSize: 12, textAlign: "center", fontWeight: "normal", marginTop: 2 }}>{item.title}</Text>
+                        <Text style={{ fontSize: 10, textAlign: "center" }}>{item.brand}</Text>
+                        <Text style={{ fontSize: 12, textAlign: "center", fontWeight: "normal", marginTop: 2 }}>{item.title ? item.product_range ? item.title+" : "+item.product_range : item.title : item.product_range}</Text>
                         <View style={{flexDirection: "row", marginTop: 5}}>
                         <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "bold" }}>{'Rs. ' + item.price}</Text>
                         <Text style={{ fontSize: 10, textDecorationLine: "line-through" }}>{'Rs. ' + item.mrp}</Text>

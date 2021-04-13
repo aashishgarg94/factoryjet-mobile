@@ -56,8 +56,7 @@ class WishItem extends React.Component {
           />
         </View>
         <View style={{marginTop: 10}}>
-          <Text style={{ fontSize: 12, fontWeight: "normal", marginTop: 2 }}>{'GST Applicable: ' + item.gst}</Text>
-          <Text style={{ fontSize: 12, fontWeight: "normal", marginTop: 2 }}>{'Expected Delivery: ' + item.delivery}</Text>
+          <Text style={{ fontSize: 12, fontWeight: "normal", marginTop: 2 }}>GST Applicable: {item.gst ? item.gst+"%" : 0}</Text>
         </View>
       </View>
       </View>

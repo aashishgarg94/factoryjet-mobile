@@ -38,7 +38,8 @@ class CartItem extends React.Component {
         <View style={{ flexDirection: "row" , justifyContent: "space-between"}}>
 
           <View>
-            <Text style={{ fontSize: 15, fontWeight: "normal", marginTop: 2 }}>{item.title}</Text>
+          <Text style={{ fontSize: 15, fontWeight: "normal", marginTop: 2 }}>{item.brand}</Text>
+            <Text style={{ fontSize: 15, fontWeight: "normal", marginTop: 2 }}>{item.title ? item.product_range ? item.title+" : "+item.product_range : item.title : item.product_range}</Text>
             <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "normal", marginTop: 2 }}>{item.discount + '% Discount'}</Text>
             <View style={{ flexDirection: "row", paddingTop: 20, paddingLeft: 2 }}>
               <View style={{borderWidth: 1, backgroundColor: "#F2F1F1", borderColor: "grey", padding: 2, margin: 1}} onStartShouldSetResponder={() => {this.props.ui.loading ? null : decreaseCartQty()}}><Text style={{color: theme.colors.primary, fontSize: 15}}>{' - '}</Text></View>
@@ -67,8 +68,7 @@ class CartItem extends React.Component {
           />
         </View>
         <View style={{marginTop: 10}}>
-          <Text style={{ fontSize: 12, fontWeight: "normal", marginTop: 2 }}>{'GST Applicable: ' + item.gst}</Text>
-          <Text style={{ fontSize: 12, fontWeight: "normal", marginTop: 2 }}>{'Expected Delivery: ' + item.delivery}</Text>
+          <Text style={{ fontSize: 12, fontWeight: "normal", marginTop: 2 }}>GST Applicable: {item.gst ? item.gst+"%" : 0}</Text>
         </View>
       </View>
       </View>

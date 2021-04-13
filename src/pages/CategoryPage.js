@@ -12,13 +12,13 @@ class CategoryPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      category: "Category"
+      category_name: "Category"
     }
   }
   componentDidMount() {
     this.setState({
-      category: this.props.route.params.categoryId.toString()
-    }, this.props.getAllProducts(this.state.category))
+      category_name: this.props.route.params.category.toString()
+    }, this.props.getAllProducts(this.props.route.params.categoryId.toString()))
   }
 
   render() {
@@ -27,7 +27,7 @@ class CategoryPage extends React.Component {
     return (
       <View style={{flex: 1, backgroundColor: "white"}}>
         <TitleBar/>
-        <PageTitle title={this.state.category} />
+        <PageTitle title={this.state.category_name} />
         <ScrollView>
           <View style={{flexWrap: "wrap", flexDirection: "row", marginVertical: 0, paddingHorizontal: 5}}>
           { itemsList.map( ( item ) => <ProductItem item = { item } key={item.id} /> ) }
