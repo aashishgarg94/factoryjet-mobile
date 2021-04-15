@@ -40,8 +40,10 @@ class CartItem extends React.Component {
           <View>
           <Text style={{ fontSize: 15, fontWeight: "normal", marginTop: 2 }}>{item.brand}</Text>
             <Text style={{ fontSize: 15, fontWeight: "normal", marginTop: 2 }}>{item.title ? item.product_range ? item.title+" : "+item.product_range : item.title : item.product_range}</Text>
-            <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "normal", marginTop: 2 }}>{item.discount + '% Discount'}</Text>
-            <View style={{ flexDirection: "row", paddingTop: 20, paddingLeft: 2 }}>
+            {item.price !== item.mrp ? 
+            <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "normal", marginTop: 5 }}>{100 * (item.mrp - item.price) / item.mrp + '% Discount'}</Text>
+            : null}
+            <View style={{ flexDirection: "row", paddingTop: 20, paddingLeft: 5 }}>
               <View style={{borderWidth: 1, backgroundColor: "#F2F1F1", borderColor: "grey", padding: 2, margin: 1}} onStartShouldSetResponder={() => {this.props.ui.loading ? null : decreaseCartQty()}}><Text style={{color: theme.colors.primary, fontSize: 15}}>{' - '}</Text></View>
               <View style={{borderWidth: 1, borderColor: "grey", paddingHorizontal: 5, justifyContent: "center", alignItems: "center"}}><Text style={{color: theme.colors.primary, fontSize: 15, textAlign: "center"}}> {item.qty} </Text></View>
               <View style={{borderWidth: 1, backgroundColor: "#F2F1F1", borderColor: "grey", padding: 2, margin: 1}} onStartShouldSetResponder={() => {this.props.ui.loading ? null : increaseCartQty()}}><Text style={{color: theme.colors.primary, fontSize: 15}}>{' + '}</Text></View>
@@ -57,7 +59,11 @@ class CartItem extends React.Component {
                 <FontAwesomeIcon icon={faTrash} size={15} color="grey" style={{opacity: 0.8}} />
               </View>
             </View>
-            <Text style={{ fontSize: 15, marginTop: 5, color: theme.colors.primary, paddingLeft: 2 }}>{'Rs. ' + item.price * item.qty}</Text>
+            <View style={{flexDirection: 'row', marginTop: 10, alignItems: "center"}}>
+              <Text style={{ fontSize: 15, color: theme.colors.primary, paddingHorizontal: 5 }}>{'Rs. ' + item.price * item.qty}</Text>
+              {item.price !== item.mrp ? <Text style={{fontSize: 12, textDecorationLine: "line-through"}}> {item.mrp * item.qty} </Text> : null }
+            </View>
+            <Text style={{fontSize: 12, marginTop: 2, paddingHorizontal: 5}}>{item.qty} {item.sku? item.sku_unit? '* '+item.sku+' '+item.sku_unit : '* '+item.sku+'  Sku Unit': null}</Text>
           </View>
           <Image
             source={require('../images/hoodie.jpeg')}
@@ -67,7 +73,7 @@ class CartItem extends React.Component {
             PlaceholderContent={<ActivityIndicator />}
           />
         </View>
-        <View style={{marginTop: 10}}>
+        <View style={{marginTop: 15}}>
           <Text style={{ fontSize: 12, fontWeight: "normal", marginTop: 2 }}>GST Applicable: {item.gst ? item.gst+"%" : 0}</Text>
         </View>
       </View>

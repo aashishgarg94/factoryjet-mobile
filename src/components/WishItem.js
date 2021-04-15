@@ -22,7 +22,7 @@ class WishItem extends React.Component {
 
           <View>
             <Text style={{ fontSize: 15, fontWeight: "normal", marginTop: 2 }}>{item.title}</Text>
-            <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "normal", marginTop: 2 }}>{item.discount + '% Discount'}</Text>
+            <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "normal", marginTop: 2 }}>{100 * (item.mrp - item.price) / item.mrp + '% Discount'}</Text>
             <Text style={{ fontSize: 12, marginTop: 15, color: "grey", paddingLeft: 2, textDecorationLine: "line-through" }}>{'Rs. ' + item.mrp}</Text>
             <View style={{flexDirection: "row", alignItems: "center"}}>
               <Text style={{ fontSize: 15, marginTop: 2, color: theme.colors.primary, paddingLeft: 2, paddingRight: 20 }}>{'Rs. ' + item.price}</Text>
