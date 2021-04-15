@@ -1,12 +1,14 @@
 import {
     SET_ITEM,
     SET_ITEMSLIST,
+    SET_ITEMSHOMEPAGELIST,
     SET_CARTLIST,
     SET_ORDERSLIST,
     ADD_TO_CART,
     SET_WISHLIST,
     ADD_TO_WISHLIST,
     SET_CATEGORIESLIST,
+    SET_BRANDSLIST,
     REMOVE_FROM_CART,
     REMOVE_FROM_WISHLIST,
     LOADING_DATA
@@ -20,7 +22,8 @@ const initialState = {
     ordersList: [{id: 1, date: "05 Jan 2021", store: "XYZ Store", store_location: "Mumbai, India", delivery_address: "Veera Desai Road, Azad Nagar, Mumbai", items: [{id: 1, title: "Brass Knob Set", qty: 2}, {id: 2, title: "Nails", qty: 1}], status: "Delivered", amount: 5000}],
     cartList: [],
     wishList: [],
-    categoriesList: []
+    categoriesList: [],
+    brandsList: []
 }
 
 export function dataReducer(state = initialState, action) {
@@ -35,6 +38,11 @@ export function dataReducer(state = initialState, action) {
                 ...state,
                 itemsList: action.payload,
             };
+        case SET_ITEMSHOMEPAGELIST:
+            return {
+                ...state,
+                itemsHomePageList: action.payload
+            }
         case SET_ITEM:
             return {
                 ...state,
@@ -78,10 +86,15 @@ export function dataReducer(state = initialState, action) {
                 ...state,
             }
         case SET_CATEGORIESLIST:
-            console.log(action.payload)
             return {
                 ...state,
                 categoriesList: action.payload,
+                loading: false
+            }
+        case SET_BRANDSLIST:
+            return {
+                ...state,
+                brandsList: action.payload,
                 loading: false
             }
         case REMOVE_FROM_CART:

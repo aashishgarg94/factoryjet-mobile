@@ -69,6 +69,12 @@ class CartScreen extends React.Component {
       </>
     )
 
+    const messageMarkup = (tab) => (
+      <View style={{marginTop: 150, paddingHorizontal: 20, alignItems: "center"}}>
+        <Text>{ this.state.tab === 'cart' ? 'Your Cart is empty, shop for more items' : 'Your Wishlist is empty, shop for more items' }</Text>
+      </View>
+    )
+
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <TitleBar />
@@ -77,7 +83,7 @@ class CartScreen extends React.Component {
           {this.state.tab === "cart" ? this.state.cartlist.map((item) => <CartItem item={item} key={item.id} />)
             : this.state.tab === "wishlist" ? this.state.wishlist.map((item) => <WishItem item={item} key={item.id} />)
               : null}
-          {this.state.tab === "cart" ? checkoutCostMarkup : null}
+          {this.state.tab === "cart" ? this.state.cartlist.length !== 0 ? checkoutCostMarkup : messageMarkup(this.state.tab) : this.state.wishlist.length !== 0 ? null : messageMarkup(this.state.tab) }
         </ScrollView>
         <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 10, margin: 2 }}>
           {this.state.tab === "cart" ?

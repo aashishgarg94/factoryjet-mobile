@@ -6,8 +6,12 @@ import { connect } from 'react-redux'
 import TitleBar from '../components/TitleBar'
 import ProductItem from '../components/ProductItem'
 import PageTitle from '../components/PageTitle'
+import { getNewArrivalsProducts } from '../redux/actions/dataActions'
 
 class ArrivalsScreen extends React.Component {
+  componentDidMount() {
+    this.props.getNewArrivalsProducts()
+  }
   render() {
     const { data: { itemsList}, theme } = this.props
 
@@ -34,6 +38,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
+  getNewArrivalsProducts
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withTheme(ArrivalsScreen))

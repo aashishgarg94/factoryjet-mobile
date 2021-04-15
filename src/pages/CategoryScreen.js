@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
 import { View, ScrollView, Dimensions } from 'react-native'
 import { Text, withTheme } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { getAllProductCategories } from '../redux/actions/dataActions'
+import { getAllProductCategories, getProductSubCategories } from '../redux/actions/dataActions'
 import TitleBar from '../components/TitleBar'
 import PageTitle from '../components/PageTitle'
 import CategoryListing from '../components/CategoryListing'
@@ -11,8 +11,12 @@ import CategoryListing from '../components/CategoryListing'
 class CategoryScreen extends React.Component {
 
   componentDidMount(){
-    console.log("check")
-    this.props.getAllProductCategories()
+    const categoryId = this.props.route?.params?.category_id
+    if (categoryId) {
+      this.props.getProductSubCategories(categoryId)
+    }else{
+      this.props.getAllProductCategories()
+    }
   }
 
   render() {
@@ -40,7 +44,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
-  getAllProductCategories
+  getAllProductCategories,
+  getProductSubCategories
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withTheme(CategoryScreen))

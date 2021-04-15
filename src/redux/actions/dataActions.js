@@ -7,7 +7,9 @@ import {
     STOP_LOADING_UI,
     LOADING_DATA,
     SET_CATEGORIESLIST,
-    SET_ITEMSLIST
+    SET_BRANDSLIST,
+    SET_ITEMSLIST,
+    SET_ITEMSHOMEPAGELIST
  } from '../types'
 
  import axios from 'axios';
@@ -47,41 +49,159 @@ export const getAllProductCategories = () => (dispatch) => {
     axios
       .post('/all_product_categories')
       .then((res) => {
-          console.log(res.data)
         dispatch({
           type: SET_CATEGORIESLIST,
           payload: res.data.categories_list,
         });
       })
-      .catch((err) => console.log(err));
-  };
+      .catch((err) => {
+        dispatch({
+          type: SET_CATEGORIESLIST,
+          payload: [],
+        });
+  })
+};
 
 export const getProductSubCategories = (itemId) => (dispatch) => {
-    console.log(itemId)
     dispatch({ type: LOADING_DATA });
     axios
       .post('/all_product_categories', null, {params: {parent_category: itemId}})
       .then((res) => {
-          console.log(res)
         dispatch({
           type: SET_CATEGORIESLIST,
           payload: res.data.categories_list,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        dispatch({
+          type: SET_CATEGORIESLIST,
+          payload: [],
+        });
+      });
   };
 
+  export const getAllProductBrands = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios
+      .post('/all_brands')
+      .then((res) => {
+        dispatch({
+          type: SET_BRANDSLIST,
+          payload: res.data.brands_list,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_BRANDSLIST,
+          payload: [],
+        });
+  })
+};
+
   export const getAllProducts = (itemId) => (dispatch) => {
-    console.log(itemId)
     dispatch({ type: LOADING_DATA });
     axios
       .post('/all_products', null, {params: {category_id: itemId}})
       .then((res) => {
-          console.log(res.data.products_list)
         dispatch({
           type: SET_ITEMSLIST,
           payload: res.data.products_list,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: [],
+        });
+      });
+  };
+
+  export const getHomepageProducts = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios
+      .post('/homepage_products')
+      .then((res) => {
+        dispatch({
+          type: SET_ITEMSHOMEPAGELIST,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_ITEMSHOMEPAGELIST,
+          payload: [],
+        });
+      });
+  };
+
+  export const getNewArrivalsProducts = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios
+      .post('/new_arrivals_products')
+      .then((res) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: res.data.products_list,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: [],
+        });
+      });
+  };
+
+  export const getValueOfferProducts = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios
+      .post('/value_offer_products')
+      .then((res) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: res.data.products_list,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: [],
+        });
+      });
+  };
+
+  export const getBestsellerProducts = () => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios
+      .post('/bestseller_products')
+      .then((res) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: res.data.products_list,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: [],
+        });
+      });
+  };
+
+  export const getAllBrandProducts = (brand) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios
+      .post('/brand_products', null, {params: {brand: brand}})
+      .then((res) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: res.data.products_list,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_ITEMSLIST,
+          payload: [],
+        });
+      });
   };

@@ -6,8 +6,12 @@ import { connect } from 'react-redux'
 import TitleBar from '../components/TitleBar'
 import ProductItem from '../components/ProductItem'
 import PageTitle from '../components/PageTitle'
+import { getValueOfferProducts } from '../redux/actions/dataActions'
 
 class OffersScreen extends React.Component {
+  componentDidMount() {
+    this.props.getValueOfferProducts()
+  }
   render() {
     const { data: { itemsList}, theme } = this.props
 
@@ -34,6 +38,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
+  getValueOfferProducts
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withTheme(OffersScreen))

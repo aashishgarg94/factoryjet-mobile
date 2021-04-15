@@ -11,9 +11,12 @@ class CategoryItem extends React.Component {
 
         return (
             <TouchableOpacity
-                onPress={() => {
+            onPress={() => {
+                item.has_subcategories === "True" ?
+                this.props.navigation.navigate('Shop By Category', { screen: "CategoryScreen", params: { category_id: item.id } })
+                :
                 this.props.navigation.navigate('CategoryPage',
-                { categoryId: item.id} )
+                { category: item.title, categoryId: item.id } )
             }}>
             <View style={{ width: width, borderRadius: 5, margin: margin,
                 elevation: 5, shadowOffset: { width: 0, height: 1 }, shadowRadius: 2, shadowColor: "#000" }}>
@@ -25,7 +28,7 @@ class CategoryItem extends React.Component {
                     PlaceholderContent={<ActivityIndicator />}
                 >
                 <View style={{ backgroundColor: "grey", position: "absolute", bottom: 0, left: 0, right: 0, 
-                    alignItems: "center", borderBottomLeftRadius: 5, borderBottomRightRadius: 5, opacity: 0.8 }}>
+                    alignItems: "center", borderBottomLeftRadius: 5, borderBottomRightRadius: 5, opacity: 0.9 }}>
             <Text style={{fontWeight: "normal", fontSize: textSize, paddingVertical: 5, color: "white", textAlign: "center" }}>{item.title}</Text>
                 </View>
                 </ImageBackground>

@@ -14,10 +14,11 @@ import OffersScreen from '../pages/OffersScreen'
 import CartScreen from '../pages/CartScreen'
 import ArrivalsScreen from '../pages/ArrivalsScreen'
 import CategoryScreen from '../pages/CategoryScreen'
+import BrandsScreen from '../pages/BrandsScreen'
 import CategoryPage from '../pages/CategoryPage'
+import BrandPage from '../pages/BrandPage'
 import BestsellersScreen from '../pages/BestsellersScreen'
 import OrdersScreen from '../pages/OrdersScreen'
-import SettingsScreen from '../pages/SettingsScreen'
 import CustomerSupportScreen from '../pages/CustomerSupportScreen'
 
 const Stack = createStackNavigator();
@@ -36,6 +37,15 @@ function CategoryStack() {
     <Stack.Navigator initialRouteName="CategoryScreen" screenOptions={{headerShown: false}}  >
       <Stack.Screen name="CategoryScreen" component={CategoryScreen} />
       <Stack.Screen name="CategoryPage" component={CategoryPage} />
+    </Stack.Navigator>
+  );
+}
+
+function BrandsStack() {
+  return (
+    <Stack.Navigator initialRouteName="BrandsScreen" screenOptions={{headerShown: false}} >
+      <Stack.Screen name="BrandsScreen" component={BrandsScreen}/>
+      <Stack.Screen name="BrandPage" component={BrandPage} />
     </Stack.Navigator>
   );
 }
@@ -80,14 +90,6 @@ function OrdersStack() {
   );
 }
 
-function SettingsStack() {
-  return (
-    <Stack.Navigator initialRouteName="SettingsScreen" screenOptions={{headerShown: false}} >
-      <Stack.Screen name="SettingsScreen" component={SettingsScreen}/>
-    </Stack.Navigator>
-  );
-}
-
 function CustomerSupportStack() {
   return (
     <Stack.Navigator initialRouteName="CustomerSupportScreen" screenOptions={{headerShown: false}} >
@@ -126,10 +128,10 @@ export default function AppNavigator() {
       <Drawer.Screen name="Value Offers" component={OffersStack} options={{ unmountOnBlur: true }}/>
       <Drawer.Screen name="New Arrivals" component={ArrivalsStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Shop By Category" component={CategoryStack} options={{ unmountOnBlur: true }} />
+      <Drawer.Screen name="Shop By Brands" component={BrandsStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Bestsellers" component={BestsellersStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="My Cart" component={CartStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="My Orders" component={OrdersStack} options={{ unmountOnBlur: true }} />
-      <Drawer.Screen name="Settings" component={SettingsStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Customer Support" component={CustomerSupportStack} options={{ unmountOnBlur: true }} />
     </Drawer.Navigator>
     </NavigationContainer>

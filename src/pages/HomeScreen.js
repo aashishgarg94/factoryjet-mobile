@@ -9,8 +9,13 @@ import CategoryItem from '../components/CategoryItem'
 import ProductItem from '../components/ProductItem'
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { getHomepageProducts, getAllProductCategories } from '../redux/actions/dataActions'
 
 class HomeScreen extends React.Component {
+  componentDidMount() {
+    this.props.getHomepageProducts()
+    this.props.getAllProductCategories()
+  }
   render() {
     const { data: { categoriesList, itemsHomePageList }, theme } = this.props
     const screenWidth = Dimensions.get('window').width
@@ -22,7 +27,7 @@ class HomeScreen extends React.Component {
           <View style={{ flexDirection: "row", marginVertical: 10 }}>
             <View style={{ flex: 0.05 }}></View>
             <View style={{ flex: 0.9, flexWrap: "wrap", flexDirection: "row" }}>
-              {sectionData.map((item) => <CategoryItem item={item} key={item.id} width={screenWidth * 9 / 20 - 30} margin={15} textSize={10} />)}
+              {sectionData.map((item) => <CategoryItem item={item} key={item.id} width={screenWidth * 9 / 20 - 30} margin={15} textSize={15} />)}
             </View>
             <View style={{ flex: 0.05 }}></View>
           </View>
@@ -61,9 +66,9 @@ class HomeScreen extends React.Component {
               </View>
             </ImageBackground>
           </View>
-          {sectionMarkup("New Arrivals", itemsHomePageList, "arrivals")}
-          {sectionMarkup("Bestsellers", itemsHomePageList, "bestsellers")}
-          {sectionMarkup("Great Deals", itemsHomePageList, "offers")}
+          {itemsHomePageList.new_arrivals?.products_list ? sectionMarkup("New Arrivals", itemsHomePageList.new_arrivals.products_list, "arrivals") : null}
+          {itemsHomePageList.bestsellers?.products_list ? sectionMarkup("Bestsellers", itemsHomePageList.bestsellers.products_list, "bestsellers") : null}
+          {itemsHomePageList.value_offers?.products_list ? sectionMarkup("Great Deals", itemsHomePageList.value_offers.products_list, "offers") : null}
           {sectionMarkup("Shop By Category", categoriesList, "categories")}
         </ScrollView>
       </View>
@@ -80,6 +85,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
+  getHomepageProducts,
+  getAllProductCategories
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withTheme(function(props) {

@@ -6,19 +6,28 @@ import { connect } from 'react-redux'
 import TitleBar from '../components/TitleBar'
 import ProductItem from '../components/ProductItem'
 import PageTitle from '../components/PageTitle'
-import { getBestsellerProducts } from '../redux/actions/dataActions'
+import { getAllBrandProducts } from '../redux/actions/dataActions'
 
-class BestsellersScreen extends React.Component {
-  componentDidMount() {
-    this.props.getBestsellerProducts()
+class BrandPage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      brand_name: "Brand"
+    }
   }
+  componentDidMount() {
+    this.setState({
+      brand_name: this.props.route.params.brand.toString()
+    }, this.props.getAllBrandProducts(this.props.route.params.brand.toString()))
+  }
+
   render() {
-    const { data: { itemsList}, theme } = this.props
+    const { data: { itemsList }, theme } = this.props
 
     return (
       <View style={{flex: 1, backgroundColor: "white"}}>
         <TitleBar/>
-        <PageTitle title="Bestsellers" />
+        <PageTitle title={this.state.brand_name} />
         <ScrollView>
           <View style={{flexWrap: "wrap", flexDirection: "row", marginVertical: 0, paddingHorizontal: 5}}>
           { itemsList.map( ( item ) => <ProductItem item = { item } key={item.id} /> ) }
@@ -29,7 +38,7 @@ class BestsellersScreen extends React.Component {
   }
 }
 
-BestsellersScreen.propTypes = {
+BrandPage.propTypes = {
   data: propTypes.object.isRequired
 }
 
@@ -38,7 +47,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
-  getBestsellerProducts
+  getAllBrandProducts
 }
 
-export default connect(mapStateToProps, mapActionToProps)(withTheme(BestsellersScreen))
+export default connect(mapStateToProps, mapActionToProps)(withTheme(BrandPage))
