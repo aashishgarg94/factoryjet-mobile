@@ -1,6 +1,6 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { View, ScrollView } from 'react-native'
+import { View, ActivityIndicator, ScrollView } from 'react-native'
 import { Text, withTheme, Divider } from 'react-native-elements'
 import { connect } from 'react-redux'
 import TitleBar from '../components/TitleBar'

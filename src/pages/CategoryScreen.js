@@ -1,6 +1,6 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { View, ScrollView, Dimensions } from 'react-native'
+import { View, ScrollView, ActivityIndicator } from 'react-native'
 import { Text, withTheme } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { getAllProductCategories, getProductSubCategories } from '../redux/actions/dataActions'
@@ -20,17 +20,19 @@ class CategoryScreen extends React.Component {
   }
 
   render() {
-    const { data: { categoriesList}, theme } = this.props
-    const screenWidth = Dimensions.get('window').width
+    const { data: { categoriesList, loading }, theme } = this.props
 
     return (
       <View style={{flex: 1, backgroundColor: "white"}}>
         <TitleBar/>
-        <PageTitle title="Shop By Category" />
-        <ScrollView>
-          { categoriesList.map( ( item ) => <CategoryListing item = { item } key={item.id} /> ) }
-          </ScrollView>
-      </View>
+          <PageTitle title="Shop By Category" />
+          { loading ? 
+            <ActivityIndicator size={30} color={theme.colors.primary} style={{paddingTop: 100}}/>
+            :
+          <ScrollView>
+            { categoriesList.map( ( item ) => <CategoryListing item = { item } key={item.id} /> ) }
+          </ScrollView> }
+      </View> 
     );
   }
 }

@@ -17,7 +17,7 @@ class HomeScreen extends React.Component {
     this.props.getAllProductCategories()
   }
   render() {
-    const { data: { categoriesList, itemsHomePageList }, theme } = this.props
+    const { data: { categoriesList, itemsHomePageList, loading }, theme } = this.props
     const screenWidth = Dimensions.get('window').width
 
     const sectionMarkup = (sectionTitle, sectionData, sectionType) => (
@@ -52,25 +52,28 @@ class HomeScreen extends React.Component {
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <TitleBar />
-        <ScrollView>
-          <View style={{ paddingHorizontal: 10, paddingTop: 10, paddingBottom: 20 }}>
-            <ImageBackground
-              source={require('../images/plumbing.jpg')}
-              resizeMode="stretch"
-              resizeMethod="resize"
-              style={{ width: "100%", height: 200 }}
-              PlaceholderContent={<ActivityIndicator />}
-            >
-              <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: theme.colors.primary, opacity: 0.7 }}>
-                <Text style={{ textAlign: "center", fontSize: 15, paddingVertical: 5, color: "white", fontWeight: "normal" }}>Highlighted Category</Text>
-              </View>
-            </ImageBackground>
-          </View>
-          {itemsHomePageList.new_arrivals?.products_list ? sectionMarkup("New Arrivals", itemsHomePageList.new_arrivals.products_list, "arrivals") : null}
-          {itemsHomePageList.bestsellers?.products_list ? sectionMarkup("Bestsellers", itemsHomePageList.bestsellers.products_list, "bestsellers") : null}
-          {itemsHomePageList.value_offers?.products_list ? sectionMarkup("Great Deals", itemsHomePageList.value_offers.products_list, "offers") : null}
-          {sectionMarkup("Shop By Category", categoriesList, "categories")}
-        </ScrollView>
+        { loading ? 
+          <ActivityIndicator size={30} color={theme.colors.primary} style={{paddingTop: 100}}/>
+          :
+          <ScrollView>
+            <View style={{ paddingHorizontal: 10, paddingTop: 10, paddingBottom: 20 }}>
+              <ImageBackground
+                source={require('../images/plumbing.jpg')}
+                resizeMode="stretch"
+                resizeMethod="resize"
+                style={{ width: "100%", height: 200 }}
+                PlaceholderContent={<ActivityIndicator />}
+              >
+                <View style={{ position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: theme.colors.primary, opacity: 0.7 }}>
+                  <Text style={{ textAlign: "center", fontSize: 15, paddingVertical: 5, color: "white", fontWeight: "normal" }}>Highlighted Category</Text>
+                </View>
+              </ImageBackground>
+            </View>
+            {itemsHomePageList.new_arrivals?.products_list ? sectionMarkup("New Arrivals", itemsHomePageList.new_arrivals.products_list, "arrivals") : null}
+            {itemsHomePageList.bestsellers?.products_list ? sectionMarkup("Bestsellers", itemsHomePageList.bestsellers.products_list, "bestsellers") : null}
+            {itemsHomePageList.value_offers?.products_list ? sectionMarkup("Great Deals", itemsHomePageList.value_offers.products_list, "offers") : null}
+            {sectionMarkup("Shop By Category", categoriesList, "categories")}
+          </ScrollView> }
       </View>
     );
   }

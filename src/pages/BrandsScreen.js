@@ -1,6 +1,6 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { View, ScrollView, Dimensions } from 'react-native'
+import { View, ActivityIndicator, ScrollView } from 'react-native'
 import { Text, withTheme } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { getAllProductBrands } from '../redux/actions/dataActions'
@@ -15,15 +15,18 @@ class BrandsScreen extends React.Component {
   }
 
   render() {
-    const { data: { brandsList}, theme } = this.props
+    const { data: { brandsList, loading }, theme } = this.props
 
     return (
       <View style={{flex: 1, backgroundColor: "white"}}>
         <TitleBar/>
         <PageTitle title="Shop By Brands" />
-        <ScrollView>
-          { brandsList.map( ( item ) => <BrandListing item = { item } key={item.id} /> ) }
-          </ScrollView>
+        { loading ? 
+          <ActivityIndicator size={30} color={theme.colors.primary} style={{paddingTop: 100}}/>
+          :
+          <ScrollView>
+            { brandsList.map( ( item ) => <BrandListing item = { item } key={item.id} /> ) }
+           </ScrollView> }
       </View>
     );
   }

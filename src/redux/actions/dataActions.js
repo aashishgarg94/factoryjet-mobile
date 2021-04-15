@@ -9,7 +9,8 @@ import {
     SET_CATEGORIESLIST,
     SET_BRANDSLIST,
     SET_ITEMSLIST,
-    SET_ITEMSHOMEPAGELIST
+    SET_ITEMSHOMEPAGELIST,
+    SET_ITEM
  } from '../types'
 
  import axios from 'axios';
@@ -202,6 +203,24 @@ export const getProductSubCategories = (itemId) => (dispatch) => {
         dispatch({
           type: SET_ITEMSLIST,
           payload: [],
+        });
+      });
+  };
+
+  export const getProduct = (itemId) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios
+      .post('/get_product_by_id', null, {params: {product_id: itemId}})
+      .then((res) => {
+        dispatch({
+          type: SET_ITEM,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_ITEM,
+          payload: {},
         });
       });
   };

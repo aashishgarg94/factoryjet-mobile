@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import { loginUser } from '../redux/actions/userActions'
 
 class Login extends React.Component {
+    componentDidMount() {
+    }
     constructor(props) {
         super(props)
         this.state = {

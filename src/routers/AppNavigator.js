@@ -12,6 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import HomeScreen from '../pages/HomeScreen'
 import OffersScreen from '../pages/OffersScreen'
 import CartScreen from '../pages/CartScreen'
+import ProductPage from '../pages/ProductPage'
 import ArrivalsScreen from '../pages/ArrivalsScreen'
 import CategoryScreen from '../pages/CategoryScreen'
 import BrandsScreen from '../pages/BrandsScreen'
@@ -78,6 +79,7 @@ function CartStack() {
   return (
     <Stack.Navigator initialRouteName="CartScreen" screenOptions={{headerShown: false}} >
       <Stack.Screen name="CartScreen" component={CartScreen}/>
+      <Stack.Screen name="ProductPage" component={ProductPage}/>
     </Stack.Navigator>
   );
 }

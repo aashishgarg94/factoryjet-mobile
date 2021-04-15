@@ -15,11 +15,9 @@ export const loginUser = (loginData) => (dispatch) => {
   axios
     .post('/login/buyer', qs.stringify(loginData))
     .then((res) => {
-        console.log(res)
       setAuthorizationHeader(res.data.access_token);
       dispatch({ type: SET_AUTHENTICATED });
       dispatch(getUserData());
-      console.log("logged in")
     })
     .catch((err) => {
         console.log(err)
@@ -69,11 +67,9 @@ export const editUserDetails = (userId, userDetails) => (dispatch) => {
 };
 
 const setAuthorizationHeader = (token) => {
-  console.log("check auth set")
   const AuthToken = `Bearer ${token}`;
   AsyncStorage.setItem('AuthToken', AuthToken);
   axios.defaults.headers.common.Authorization = AuthToken;
-  console.log("checked auth set")
 };
 
 export const clearErrors = () => (dispatch) => {

@@ -19,7 +19,7 @@ const initialState = {
     item: {},
     itemsList: [],
     itemsHomePageList: [],
-    ordersList: [{id: 1, date: "05 Jan 2021", store: "XYZ Store", store_location: "Mumbai, India", delivery_address: "Veera Desai Road, Azad Nagar, Mumbai", items: [{id: 1, title: "Brass Knob Set", qty: 2}, {id: 2, title: "Nails", qty: 1}], status: "Delivered", amount: 5000}],
+    ordersList: [],
     cartList: [],
     wishList: [],
     categoriesList: [],
@@ -37,16 +37,19 @@ export function dataReducer(state = initialState, action) {
             return {
                 ...state,
                 itemsList: action.payload,
+                loading: false
             };
         case SET_ITEMSHOMEPAGELIST:
             return {
                 ...state,
-                itemsHomePageList: action.payload
+                itemsHomePageList: action.payload,
+                loading: false
             }
         case SET_ITEM:
             return {
                 ...state,
-                item: action.payload
+                item: action.payload,
+                loading: false
             }
         case SET_CARTLIST:
             return {
