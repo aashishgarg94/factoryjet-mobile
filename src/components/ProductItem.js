@@ -26,13 +26,22 @@ class ProductItem extends React.Component {
                         this.props.navigation.navigate('My Cart', { screen: "ProductPage", params: {productId: item.id} })
                     }}>
                     <View style={{ paddingLeft: 2 }}>
+                        {item.images?.[0]?
                         <Image
+                        source={{uri: item.images[0]}}
+                        resizeMode="contain"
+                        resizeMethod="resize"
+                        style={{ width: "auto", height: 200 }}
+                        PlaceholderContent={<ActivityIndicator />}
+                    />
+                        : <Image
                             source={require('../images/hoodie.jpeg')}
                             resizeMode="cover"
                             resizeMethod="resize"
                             style={{ width: "auto", height: 200 }}
                             PlaceholderContent={<ActivityIndicator />}
                         />
+    }
                     </View>
                     </TouchableOpacity>
                     <View style={{ flexDirection: "row", borderRadius: 5, alignItems: "center", justifyContent: "center", marginTop: 10, marginHorizontal: 10, paddingHorizontal: 5, paddingVertical: 5, backgroundColor: "black" }}>
