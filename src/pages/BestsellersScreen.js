@@ -25,6 +25,10 @@ class BestsellersScreen extends React.Component {
           <ScrollView>
             <View style={{flexWrap: "wrap", flexDirection: "row", marginVertical: 0, paddingHorizontal: 5}}>
             { itemsList.map( ( item ) => <ProductItem item = { item } key={item.id} /> ) }
+            { itemsList.length === 0 ? 
+              <View style={{flex: 1, marginVertical: 150, flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
+                <Text style={{textAlign: "center"}}>Bestsellers Coming Soon!</Text>
+              </View> : null}
             </View>
           </ScrollView> }
       </View>

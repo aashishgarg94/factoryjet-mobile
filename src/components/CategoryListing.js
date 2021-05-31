@@ -22,7 +22,7 @@ class CategoryListing extends React.Component {
           <Image
             style={{height: 100, width: 100}}
             resizeMode="cover"
-            source={require('../images/hoodie.jpeg')}
+            source={{uri: 'https://factoryjet-category-images.s3.ap-south-1.amazonaws.com/'+item.title+'.png'}}
           />
           <View style={{flex: 1, paddingHorizontal: 20, paddingVertical: 10, justifyContent: "space-between"}}>
           <Text style={{fontWeight: "bold"}}>{item.title}</Text>

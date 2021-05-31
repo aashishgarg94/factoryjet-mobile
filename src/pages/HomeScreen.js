@@ -57,8 +57,9 @@ class HomeScreen extends React.Component {
           :
           <ScrollView>
             <View style={{ paddingHorizontal: 10, paddingTop: 10, paddingBottom: 20 }}>
+              <TouchableOpacity onPress={() => {this.props.navigation.navigate('Shop By Category')}}>
               <ImageBackground
-                source={require('../images/plumbing.jpg')}
+                source={{uri: 'https://factoryjet-category-images.s3.ap-south-1.amazonaws.com/title.png'}}
                 resizeMode="stretch"
                 resizeMethod="resize"
                 style={{ width: "100%", height: 200 }}
@@ -68,6 +69,7 @@ class HomeScreen extends React.Component {
                   <Text style={{ textAlign: "center", fontSize: 15, paddingVertical: 5, color: "white", fontWeight: "normal" }}>Highlighted Category</Text>
                 </View>
               </ImageBackground>
+              </TouchableOpacity>
             </View>
             {itemsHomePageList.new_arrivals?.products_list ? sectionMarkup("New Arrivals", itemsHomePageList.new_arrivals.products_list, "arrivals") : null}
             {itemsHomePageList.bestsellers?.products_list ? sectionMarkup("Bestsellers", itemsHomePageList.bestsellers.products_list, "bestsellers") : null}

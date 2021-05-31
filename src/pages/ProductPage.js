@@ -122,13 +122,23 @@ class ProductPage extends React.Component {
           <ActivityIndicator size={30} color={theme.colors.primary} style={{ paddingTop: 100 }} />
           :
           <ScrollView>
+            {item.images?.[0]?
             <Image
-              source={require('../images/hoodie.jpeg')}
-              resizeMode="cover"
+              source={{uri: item.images[0]}}
+              resizeMode="stretch"
               resizeMethod="resize"
               style={{ width: screenWidth, height: screenWidth }}
               PlaceholderContent={<ActivityIndicator />}
             />
+            :
+            <Image
+              source={{uri: 'https://factoryjet-category-images.s3.ap-south-1.amazonaws.com/'+item.category+'_default.png'}}
+              resizeMode="stretch"
+              resizeMethod="resize"
+              style={{ width: screenWidth, height: screenWidth }}
+              PlaceholderContent={<ActivityIndicator />}
+            />
+  }
             <View style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: "white" }}>
               <View style={{ paddingTop: 10, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                 <Text h3 style={{ textAlign: "center", color: theme.colors.primary }}>Rs. {item.price}</Text>

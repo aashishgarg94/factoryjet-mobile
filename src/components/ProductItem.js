@@ -35,7 +35,7 @@ class ProductItem extends React.Component {
                         PlaceholderContent={<ActivityIndicator />}
                     />
                         : <Image
-                            source={require('../images/hoodie.jpeg')}
+                        source={{uri: 'https://factoryjet-category-images.s3.ap-south-1.amazonaws.com/'+item.category+'_default.png'}}
                             resizeMode="cover"
                             resizeMethod="resize"
                             style={{ width: "auto", height: 200 }}

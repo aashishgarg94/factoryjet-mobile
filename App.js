@@ -9,8 +9,8 @@ import store from './src/redux/store'
 import Toast from 'react-native-toast-message';
 
 axios.defaults.baseURL = 
-  //'http://18.216.40.118:8000/'
-  'http://172.17.0.1:8000/'
+  'http://3.6.144.151:8000/'
+  //'http://172.17.0.1:8000/'
 
 const theme = {
   Text: {

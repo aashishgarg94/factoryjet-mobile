@@ -34,21 +34,29 @@ export function dataReducer(state = initialState, action) {
                 loading: true
             }
         case SET_ITEMSLIST:
+            let itemslist = action.payload;
+            itemslist?.map(item => item.price === 0 ? item.price = item.mrp : null)
             return {
                 ...state,
-                itemsList: action.payload,
+                itemsList: itemslist,
                 loading: false
             };
         case SET_ITEMSHOMEPAGELIST:
+            let itemshomepagelist = action.payload
+            itemshomepagelist.new_arrivals?.products_list?.map(item => item.price === 0 ? item.price = item.mrp : null)
+            itemshomepagelist.bestsellers?.products_list?.map(item => item.price === 0 ? item.price = item.mrp : null)
+            itemshomepagelist.value_offers?.products_list?.map(item => item.price === 0 ? item.price = item.mrp : null)
             return {
                 ...state,
-                itemsHomePageList: action.payload,
+                itemsHomePageList: itemshomepagelist,
                 loading: false
             }
         case SET_ITEM:
+            let item = action.payload
+            item.price === 0 ? item.price = item.mrp : null
             return {
                 ...state,
-                item: action.payload,
+                item: item,
                 loading: false
             }
         case SET_CARTLIST:
