@@ -1,20 +1,21 @@
 import React from 'react'
 import propTypes from 'prop-types'
-import { View, ScrollView } from 'react-native'
+import { View, ActivityIndicator, ScrollView } from 'react-native'
 import { Text, withTheme, Divider, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
+import { useNavigation } from '@react-navigation/native';
+
 import TitleBar from '../components/TitleBar'
 import CartItem from '../components/CartItem'
 import WishItem from '../components/WishItem'
 import PageTitle from '../components/PageTitle'
+import { getAllCartItems } from '../redux/actions/dataActions'
 
 class CartScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tab: 'cart',
-      cartlist: [],
-      wishlist: []
+      tab: 'cart'
     }
   }
 
@@ -25,26 +26,14 @@ class CartScreen extends React.Component {
         tab: routeTab
       })
     }
-    this.setState({
-      cartlist: this.props.data.cartList,
-      wishlist: this.props.data.wishList
-    })
-  }
-
-  componentDidUpdate(prevProps){
-    if(prevProps.data.cartList !== this.props.data.cartList){
-      this.setState({ cartlist: this.props.data.cartList})
-    }
-    if(prevProps.data.wishList !== this.props.data.wishList){
-      this.setState({ wishlist: this.props.data.wishList})
-    }
+    this.props.getAllCartItems()
   }
 
   render() {
-    const { theme } = this.props
+    const { theme, data: { cartList, wishList, loading } } = this.props
 
-    const subtotal = this.state.cartlist?.map(item => item.price * item.qty).reduce((prev, next) => prev + next, 0);
-    const gst = this.state.cartlist?.map(item => item.price * item.qty * item.gst / 100).reduce((prev, next) => prev + next, 0);
+    const subtotal = cartList?.map(item => item?.price * item?.qty).reduce((prev, next) => prev + next, 0);
+    const gst = cartList?.map(item => item?.price * item?.qty * item?.gst / 100).reduce((prev, next) => prev + next, 0);
 
     const checkoutCostMarkup = (
       <>
@@ -78,12 +67,16 @@ class CartScreen extends React.Component {
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <TitleBar />
+        { loading ? 
+          <ActivityIndicator size={30} color={theme.colors.primary} style={{paddingTop: 100}}/>
+          :
+          <>
         <PageTitle title={this.state.tab !== "cart" ? "My Wishlist" : "My Cart" } />
         <ScrollView>
-          {this.state.tab === "cart" ? this.state.cartlist.map((item) => <CartItem item={item} key={item.id} />)
-            : this.state.tab === "wishlist" ? this.state.wishlist.map((item) => <WishItem item={item} key={item.id} />)
+          {this.state.tab === "cart" ? cartList?.map((item) => <CartItem item={item} key={item?.id} />)
+            : this.state.tab === "wishlist" ? wishList.map((item) => <WishItem item={item} key={item?.id} />)
               : null}
-          {this.state.tab === "cart" ? this.state.cartlist.length !== 0 ? checkoutCostMarkup : messageMarkup(this.state.tab) : this.state.wishlist.length !== 0 ? null : messageMarkup(this.state.tab) }
+          {this.state.tab === "cart" ? cartList?.length !== 0 ? checkoutCostMarkup : messageMarkup(this.state.tab) : wishList.length !== 0 ? null : messageMarkup(this.state.tab) }
         </ScrollView>
         <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 10, margin: 2 }}>
           {this.state.tab === "cart" ?
@@ -92,8 +85,10 @@ class CartScreen extends React.Component {
             : <Button buttonStyle={{ borderRadius: 0, marginRight: 2, backgroundColor: "white", borderWidth: 1 }} title="GO TO CART"
               containerStyle={{ flex: 0.5 }} titleStyle={{ color: "black" }} onPress={() => this.setState({ tab: "cart" })} />}
           <Button buttonStyle={{ borderRadius: 0, color: theme.colors.primary, backgroundColor: theme.colors.primary_light, borderWidth: 1 }}
-            containerStyle={{ flex: 0.5 }} titleStyle={{}} title="CHECKOUT" />
+            containerStyle={{ flex: 0.5 }} titleStyle={{}} title="CHECKOUT" onPress={() => this.props.navigation.navigate('AddressScreen')}/>
         </View>
+        </>
+  }
       </View>
     );
   }
@@ -108,6 +103,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionToProps = {
+  getAllCartItems
 }
 
-export default connect(mapStateToProps, mapActionToProps)(withTheme(CartScreen))
+export default connect(mapStateToProps, mapActionToProps)(withTheme(function(props) {
+  const navigation = useNavigation();
+
+  return <CartScreen {...props} navigation={navigation} />;
+}))

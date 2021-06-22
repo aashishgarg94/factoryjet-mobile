@@ -11,7 +11,8 @@ import {
     SET_BRANDSLIST,
     REMOVE_FROM_CART,
     REMOVE_FROM_WISHLIST,
-    LOADING_DATA
+    LOADING_DATA,
+    SET_ADDRESSLIST
 } from '../types';
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
     cartList: [],
     wishList: [],
     categoriesList: [],
-    brandsList: []
+    brandsList: [],
+    addressList: []
 }
 
 export function dataReducer(state = initialState, action) {
@@ -35,7 +37,6 @@ export function dataReducer(state = initialState, action) {
             }
         case SET_ITEMSLIST:
             let itemslist = action.payload;
-            itemslist?.map(item => item.price === 0 ? item.price = item.mrp : null)
             return {
                 ...state,
                 itemsList: itemslist,
@@ -43,9 +44,7 @@ export function dataReducer(state = initialState, action) {
             };
         case SET_ITEMSHOMEPAGELIST:
             let itemshomepagelist = action.payload
-            itemshomepagelist.new_arrivals?.products_list?.map(item => item.price === 0 ? item.price = item.mrp : null)
-            itemshomepagelist.bestsellers?.products_list?.map(item => item.price === 0 ? item.price = item.mrp : null)
-            itemshomepagelist.value_offers?.products_list?.map(item => item.price === 0 ? item.price = item.mrp : null)
+
             return {
                 ...state,
                 itemsHomePageList: itemshomepagelist,
@@ -53,7 +52,6 @@ export function dataReducer(state = initialState, action) {
             }
         case SET_ITEM:
             let item = action.payload
-            item.price === 0 ? item.price = item.mrp : null
             return {
                 ...state,
                 item: item,
@@ -62,21 +60,14 @@ export function dataReducer(state = initialState, action) {
         case SET_CARTLIST:
             return {
                 ...state,
-                cartList: action.payload
+                cartList: action.payload,
+                loading: false
             }
-        case ADD_TO_CART:
-            const itemCartIndex = state.cartList.findIndex(
-                (item) => item.id === action.payload.id,
-              );        
-            if(itemCartIndex === -1){
-                state.cartList = state.cartList.length === 0 ? [action.payload] : [action.payload, ...state.cartList]
-            }else{
-                let itemAdded = state.cartList[itemCartIndex]
-                itemAdded.qty = itemAdded.qty + action.payload.qty
-                state.cartList[itemCartIndex] = itemAdded
-            }
+        case SET_ADDRESSLIST:
             return {
                 ...state,
+                addressList: action.payload,
+                loading: false
             }
         case SET_ORDERSLIST:
             return {
@@ -107,16 +98,6 @@ export function dataReducer(state = initialState, action) {
                 ...state,
                 brandsList: action.payload,
                 loading: false
-            }
-        case REMOVE_FROM_CART:
-            const itemCartRemoveIndex = state.cartList.findIndex(
-                (item) => item.id === action.payload,
-              );
-            if(itemCartRemoveIndex !== -1){
-                state.cartList.splice(itemCartRemoveIndex, 1)
-            }
-            return{
-                ...state
             }
         case REMOVE_FROM_WISHLIST:
             const itemWishlistRemoveIndex = state.wishList.findIndex(

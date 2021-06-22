@@ -21,6 +21,7 @@ import BrandPage from '../pages/BrandPage'
 import BestsellersScreen from '../pages/BestsellersScreen'
 import OrdersScreen from '../pages/OrdersScreen'
 import CustomerSupportScreen from '../pages/CustomerSupportScreen'
+import AddressScreen from '../pages/AddressScreen'
 
 const Stack = createStackNavigator();
 
@@ -80,6 +81,7 @@ function CartStack() {
     <Stack.Navigator initialRouteName="CartScreen" screenOptions={{headerShown: false}} >
       <Stack.Screen name="CartScreen" component={CartScreen}/>
       <Stack.Screen name="ProductPage" component={ProductPage}/>
+      <Stack.Screen name="AddressScreen" component={AddressScreen}/>
     </Stack.Navigator>
   );
 }
@@ -127,11 +129,11 @@ export default function AppNavigator() {
       }}
       >
       <Drawer.Screen name="Home" component={HomeStack} options={{ unmountOnBlur: true }} listeners={{ }}/>
-      <Drawer.Screen name="Value Offers" component={OffersStack} options={{ unmountOnBlur: true }}/>
+      {/*<Drawer.Screen name="Value Offers" component={OffersStack} options={{ unmountOnBlur: true }}/>*/}
       <Drawer.Screen name="New Arrivals" component={ArrivalsStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Shop By Category" component={CategoryStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Shop By Brands" component={BrandsStack} options={{ unmountOnBlur: true }} />
-      <Drawer.Screen name="Bestsellers" component={BestsellersStack} options={{ unmountOnBlur: true }} />
+      {/*<Drawer.Screen name="Bestsellers" component={BestsellersStack} options={{ unmountOnBlur: true }} />*/}
       <Drawer.Screen name="My Cart" component={CartStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="My Orders" component={OrdersStack} options={{ unmountOnBlur: true }} />
       <Drawer.Screen name="Customer Support" component={CustomerSupportStack} options={{ unmountOnBlur: true }} />

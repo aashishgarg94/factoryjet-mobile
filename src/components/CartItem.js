@@ -41,7 +41,7 @@ class CartItem extends React.Component {
           <Text style={{ fontSize: 15, fontWeight: "normal", marginTop: 2 }}>{item.brand}</Text>
             <Text style={{ fontSize: 15, fontWeight: "normal", marginTop: 2 }}>{item.title ? item.product_range ? item.title+" : "+item.product_range : item.title : item.product_range}</Text>
             {item.price !== item.mrp ? 
-            <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "normal", marginTop: 5 }}>{100 * (item.mrp - item.price) / item.mrp + '% Discount'}</Text>
+            <Text style={{ fontSize: 12, color: theme.colors.primary, fontWeight: "normal", marginTop: 5 }}>{Math.round(100 * (item.mrp - item.price) / item.mrp) + '% Discount'}</Text>
             : null}
             <View style={{ flexDirection: "row", paddingTop: 20, paddingLeft: 5 }}>
               <View style={{borderWidth: 1, backgroundColor: "#F2F1F1", borderColor: "grey", padding: 2, margin: 1}} onStartShouldSetResponder={() => {this.props.ui.loading ? null : decreaseCartQty()}}><Text style={{color: theme.colors.primary, fontSize: 15}}>{' - '}</Text></View>

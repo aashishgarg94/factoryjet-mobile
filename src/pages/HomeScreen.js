@@ -37,8 +37,8 @@ class HomeScreen extends React.Component {
           </View>
           <TouchableOpacity onPress={() => {
             sectionType === "arrivals" ? this.props.navigation.navigate('New Arrivals')
-            : sectionType === "bestsellers" ? this.props.navigation.navigate('Bestsellers')
-            : sectionType === "offers" ? this.props.navigation.navigate('Value Offers')
+            : sectionType === "bestsellers" ? null
+            : sectionType === "offers" ? null
             : null
           }}>
           <View style={{paddingHorizontal: 10}}>
